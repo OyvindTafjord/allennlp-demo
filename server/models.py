@@ -66,7 +66,7 @@ MODELS = {
             'https://s3-us-west-2.amazonaws.com/allennlp/models/event2mind-2018.09.17.tar.gz',  # pylint: disable=line-too-long
                 'event2mind'
         ),
-        'quarel-parser': DemoModel(
+        'quarel-parser-zero': DemoModel(
                 'https://s3-us-west-2.amazonaws.com/allennlp/models/quarel-parser-zero-2018.09.26.tar.gz',  # pylint: disable=line-too-long
                 'quarel-parser'
         )

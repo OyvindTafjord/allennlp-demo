@@ -16,18 +16,13 @@ var parserExamples = {};
 
 parserExamples["quarel"] = [
   {
-    question: "Bill eats way more sweets than Sue. Based on this, who is more likely to get diabetes? (A) Sue (B) Bill",
+    question: "Bill eats way more sweets than Sue. Based on this, who has more diabetes risk? (A) Sue (B) Bill",
     qrspec: "[sugar, +diabetes]",
     entitycues: ""
   },
   {
-    question: "In his research, Joe is finding there's a lot more diabetes in the city than in the countryside. He hypothesizes this is because people consume less sugar in the (A) city (B) countryside",
+    question: "In his research, Joe is finding there is a lot more diabetes in the city than out in the countryside. He hypothesizes this is because people consume less sugar in the (A) city (B) countryside",
     qrspec: "[sugar, +diabetes]",
-    entitycues: ""
-  },
-  {
-    question: "John finds less pollution these days compared to earlier. He thinks that maybe now there are  ___ cars than earlier. (A) Less  (B) More",
-    qrspec: "[pollution, +vehicles, -air quality]",
     entitycues: ""
   },
   {
@@ -201,7 +196,7 @@ class QuarelInput extends React.Component {
     <div className="form__field">
       <label htmlFor="#input--mc-question">Question</label>
       <textarea onChange={this.handleQuestionChange} id="input--mc-question" type="text" required="true" value={questionValue}
-    placeholder="E.g. &quot;William is ice skating and notices that his ice skates glides quicker on wet ice as opposed to freshly fallen snow. The reason for this is because there is more friction on the (A) wet ice (B) freshly fallen snow&quot;"
+    placeholder="E.g. &quot;A hockey puck slides a lot longer on a frozen lake then on a slushy lake. This means the surface of the _____ is smoother (A) frozen lake (B) slushy lake&quot;"
     disabled={outputState === "working"} />
   </div>
     <div className="form__field">
