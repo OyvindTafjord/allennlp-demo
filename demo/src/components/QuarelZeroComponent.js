@@ -18,10 +18,10 @@ parserExamples["quarel"] = [
   {
     question: "Bill eats way more sweets than Sue. Based on this, who has more diabetes risk? (A) Sue (B) Bill",
     qrspec: "[sugar, +diabetes]",
-    entitycues: ""
+    entitycues: "sugar: sweets"
   },
   {
-    question: "In his research, Joe is finding there is a lot more diabetes in the city than out in the countryside. He hypothesizes this is because people consume less sugar in the (A) city (B) countryside",
+    question: "In his research, Joe is finding there is a lot more diabetes in the city than out in the countryside. He hypothesizes this is because people in _____ consume less sugar. (A) city (B) countryside",
     qrspec: "[sugar, +diabetes]",
     entitycues: ""
   },
