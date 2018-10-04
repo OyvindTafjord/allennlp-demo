@@ -3,10 +3,10 @@ import HeatMap from './heatmap/HeatMap'
 import Collapsible from 'react-collapsible'
 import { API_ROOT } from '../api-config';
 import { withRouter } from 'react-router-dom';
-import {PaneLeft, PaneRight} from './Pane'
-import Button from './Button'
-import ModelIntro from './ModelIntro'
-
+import {PaneLeft, PaneRight} from './Pane';
+import Button from './Button';
+import ModelIntro from './ModelIntro';
+import SyntaxHighlight from './highlight/SyntaxHighlight.js';
 
 /*******************************************************************************
   <McInput /> Component
@@ -124,7 +124,7 @@ render() {
             </div>
             <div className="form__field">
             <label htmlFor="#input--mc-passage">Table</label>
-            <textarea onChange={this.handleTableChange} id="input--mc-passage" type="text" required="true" autoFocus="true" placeholder="E.g. &quot;Season\tLevel\tDivision\tSection\tPosition\tMovements\n1993\tTier 3\tDivision 2\tÖstra Svealand\t1st\tPromoted\n1994\tTier 2\tDivision 1\tNorra\t11th\tRelegation Playoffs\n&quot;" value={tableValue} disabled={outputState === "working"}></textarea>
+            <textarea onChange={this.handleTableChange} id="input--mc-passage" type="text" required="true" autoFocus="true" spellCheck="false" placeholder="E.g. &quot;Season\tLevel\tDivision\tSection\tPosition\tMovements\n1993\tTier 3\tDivision 2\tÖstra Svealand\t1st\tPromoted\n1994\tTier 2\tDivision 1\tNorra\t11th\tRelegation Playoffs\n&quot;" value={tableValue} disabled={outputState === "working"}></textarea>
             </div>
             <div className="form__field">
             <label htmlFor="#input--mc-question">Question</label>
@@ -156,7 +156,7 @@ class WikiTablesOutput extends React.Component {
 
           <div className="form__field">
             <label>Logical Form</label>
-            <div className="model__content__summary">{ logicalForm }</div>
+            <SyntaxHighlight language="lisp">{logicalForm.split('fb:').join('').split('.').join('-')}</SyntaxHighlight>
           </div>
 
           <div className="form__field">
@@ -169,15 +169,15 @@ class WikiTablesOutput extends React.Component {
                 ))}
               </Collapsible>
               <Collapsible trigger="Entity linking scores">
-                  <HeatMap xLabels={question_tokens} yLabels={entities} data={linking_scores} xLabelWidth={250} />
+                  <HeatMap xLabels={question_tokens} yLabels={entities} data={linking_scores} xLabelWidth={250} normalization="log-per-row-with-zero" />
               </Collapsible>
               {feature_scores &&
                 <Collapsible trigger="Entity linking scores (features only)">
-                    <HeatMap xLabels={question_tokens} yLabels={entities} data={feature_scores} xLabelWidth={250} />
+                    <HeatMap xLabels={question_tokens} yLabels={entities} data={feature_scores} xLabelWidth={250} normalization="log-per-row-with-zero" />
                 </Collapsible>
               }
               <Collapsible trigger="Entity linking scores (similarity only)">
-                  <HeatMap xLabels={question_tokens} yLabels={entities} data={similarity_scores} xLabelWidth={250} />
+                  <HeatMap xLabels={question_tokens} yLabels={entities} data={similarity_scores} xLabelWidth={250} normalization="log-per-row-with-zero" />
               </Collapsible>
             </Collapsible>
           </div>
