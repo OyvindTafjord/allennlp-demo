@@ -262,7 +262,7 @@ class DemoInput extends React.Component {
         return (
             <React.Fragment>
                 <FormInstructions>
-                    <span>Enter text or</span>
+                    <span>Enter text or select example:</span>
                     <Select
                         dropdownMatchSelectWidth = {false}
                         disabled={outputState === "working"}

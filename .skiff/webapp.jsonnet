@@ -255,40 +255,7 @@ local readinessProbe = {
     }
 };
 
-local db_env_variables = [
-    {
-        name: "DEMO_POSTGRES_HOST",
-        value: "127.0.0.1"
-    },
-    {
-        name: "DEMO_POSTGRES_PORT",
-        value: "5432"
-    },
-    {
-        name: "DEMO_POSTGRES_DBNAME",
-        value: "demo"
-    },
-    {
-        name: "DEMO_POSTGRES_USER",
-        valueFrom: {
-            secretKeyRef: {
-                name: "cloudsql-db-credentials",
-                key: "username"
-            }
-        }
-    },
-    {
-        name: "DEMO_POSTGRES_PASSWORD",
-        valueFrom: {
-            secretKeyRef: {
-                name: "cloudsql-db-credentials",
-                key: "password"
-            }
-        }
-    }
-];
-
-local env_variables = db_env_variables + [
+local env_variables = [
     {
         name: 'GIT_SHA',
         value: sha

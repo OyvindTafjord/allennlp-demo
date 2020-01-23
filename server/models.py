@@ -5,7 +5,6 @@ from allennlp.predictors import Predictor
 from allennlp.models.archival import load_archive
 
 from server.demo_model import DemoModel
-from server.gpt2 import Gpt2DemoModel
 
 # This maps from the name of the task
 # to the ``DemoModel`` indicating the location of the trained model
@@ -38,8 +37,8 @@ def load_demo_models(models_file: str,
         # we'll need to add corresponding logic here.
         if model_type == "allennlp":
             load = DemoModel
-        elif model_type == "gpt2":
-            load = Gpt2DemoModel
+        #elif model_type == "gpt2":
+        #    load = Gpt2DemoModel
         else:
             raise ValueError(f"unknown model type: {model_type}")
 

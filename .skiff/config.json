@@ -1,6 +1,6 @@
 {
-    "appName": "allennlp-demo",
+    "appName": "aristo-demos",
     "httpPort": 8000,
-    "contact": "allennlp-contact",
-    "team": "allennlp"
+    "contact": "oyvindt",
+    "team": "aristo"
 }

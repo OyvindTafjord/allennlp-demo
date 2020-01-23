@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Menu as AntMenu } from 'antd';
 import { InternalLink, ImgIcon } from '@allenai/varnish/components';
 
-import allenNlpLogo from './allennlp_logo.svg';
+import aristoLogo from './aristo_logo.svg';
 import { modelGroups } from '../models'
 
 /*******************************************************************************
@@ -38,12 +38,12 @@ export class MenuBase extends React.Component {
     return (
       <OuterGrid>
         <Logo>
-          <a href="http://www.allennlp.org/" target="_blank" rel="noopener">
+          <a href="https://allenai.org/aristo/" target="_blank" rel="noopener">
             <img
-              src={allenNlpLogo}
-              width={"124px"}
-              height={"22px"}
-              alt="AllenNLP" />
+              src={aristoLogo}
+              width={"32px"}
+              height={"32px"}
+              alt="Aristo" /><b>&nbsp;Aristo</b>
           </a>
         </Logo>
         <MenuContent
