@@ -49,26 +49,21 @@ local env = std.extVar('env');
 local image = std.extVar('image');
 local sha = std.extVar('sha');
 
-// Use 2 replicas in prod, only 1 in staging.
+// Use 1 replicas in prod, and 1 in staging.
 local num_replicas = (
     if env == 'prod' then
-        2
+        1
     else
         1
 );
 
 local topLevelDomain = '.apps.allenai.org';
-local canonicalTopLevelDomain = '.allennlp.org';
 
 local hosts = [
     if env == 'prod' then
         config.appName + topLevelDomain
     else
-        config.appName + '.' + env + topLevelDomain,
-    if env == 'prod' then
-        'demo' + canonicalTopLevelDomain
-    else
-        'demo' + '.' + env + canonicalTopLevelDomain
+        config.appName + '.' + env + topLevelDomain
 ];
 
 // Each app gets it's own namespace
@@ -109,52 +104,6 @@ local namespace = {
     }
 };
 
-local cloudsql_proxy_container = {
-    name: "cloudsql-proxy",
-    image: "gcr.io/cloudsql-docker/gce-proxy:1.11",
-    command: ["/cloud_sql_proxy", "--dir=/cloudsql",
-              "-instances=ai2-allennlp:us-central1:allennlp-demo-database=tcp:5432",
-              "-credential_file=/secrets/cloudsql/credentials.json"],
-    securityContext: {
-        runAsUser: 2,
-        allowPrivilegeEscalation: false
-    },
-    volumeMounts: [
-        {
-            name: "cloudsql-instance-credentials",
-            mountPath: "/secrets/cloudsql",
-            readOnly: true
-        },
-        {
-            name: "ssl-certs",
-            mountPath: "/etc/ssl/certs"
-        },
-        {
-            name: "cloudsql",
-            mountPath: "/cloudsql"
-        }
-    ]
-};
-
-local cloudsql_volumes = [
-    {
-        name: "cloudsql-instance-credentials",
-        secret: {
-            secretName: "cloudsql-instance-credentials"
-        },
-    },
-    {
-        name: "cloudsql",
-        emptyDir: {},
-    },
-    {
-        name: "ssl-certs",
-        hostPath: {
-            path: "/etc/ssl/certs"
-        }
-    }
-];
-
 // Each model typically has its own service running that handles several different endpoints
 // (/predict, /permadata, /task, /attack, etc.).  This is a convenience function that will route
 // all of those endpoints to the model service, instead of the main frontend.
@@ -168,7 +117,6 @@ local model_path(model_name, endpoint, url_extra='') = {
         servicePort: config.httpPort
     },
 };
-
 
 
 local ingress = {
@@ -246,8 +194,8 @@ local ingress = {
 
 local readinessProbe = {
     failureThreshold: 2,
-    periodSeconds: 10,
-    initialDelaySeconds: 15,
+    periodSeconds: 30,
+    initialDelaySeconds: 60,
     httpGet: {
         path: '/health',
         port: config.httpPort,
@@ -298,10 +246,8 @@ local deployment = {
                             }
                         },
                         env: env_variables
-                    },
-                    cloudsql_proxy_container
-                ],
-                volumes: cloudsql_volumes
+                    }
+                ]
             }
         }
     }
@@ -352,10 +298,8 @@ local model_deployment(model_name) = {
                             }
                         },
                         env: env_variables
-                    },
-                    cloudsql_proxy_container
-                ],
-                volumes: cloudsql_volumes
+                    }
+                ]
             }
         }
     }

@@ -21,13 +21,13 @@ const taskModels = [
 ]
 
 const taskEndpoints = {
-  "RoBERTa-SyntRuleCombo4b-D3 + TurkNL": "roberta-rule-reasoning"
+  "RoBERTa-SyntRuleCombo4b-D3 + TurkNL": "rule-reasoning"
 };
 
 const fields = [
   {name: "passage", label: "Rulebase", type: "TEXT_AREA",
    placeholder: `E.g. "Bob is blue. If someone is blue then they are rough."`},
-  {name: "question", label: "Question", type: "TEXT_INPUT",
+  {name: "question", label: "Question or statement", type: "TEXT_INPUT",
    placeholder: `Either statement like "Bob is blue" or MC question "Which is true? (A) Bob is blue. (B) Bob is red."`},
   {name: "model", label: "Model", type: "RADIO", options: taskModels, optional: true}
 ]
@@ -76,9 +76,9 @@ const examples = [
         }
       ].map(addSnippet)],
 
-  ['PropNoNeg', [
+  ['PropNeg', [
         {
-          passage: "John chases Bob. Bob does not like John.",
+          passage: "John chases Bob. Bob does not like John. If someone likes John then they chase John.",
           question: "Bob chases John.",
         }
     ].map(addSnippet)]

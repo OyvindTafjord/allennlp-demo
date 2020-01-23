@@ -1,12 +1,7 @@
 {
-    "roberta-rule-reasoning": {
-        "archive_file": "/Users/tafjord/models/roberta_mc_syntrule-try7-SyntRuleComboV4b-D3-WTurkV1-model.tar.gz",
+    "rule-reasoning": {
+        "archive_file": "https://storage.googleapis.com/skiff-models/aristo-adhoc-demos/roberta_mc_syntrule-try7-SyntRuleComboV4b-D3-WTurkV1-model.tar.gz",
         "predictor_name": "rule-reasoning",
         "max_request_length": 311108
-    },
-    "textual-entailment": {
-        "archive_file": "https://s3-us-west-2.amazonaws.com/allennlp/models/decomposable-attention-elmo-2018.02.19.tar.gz",
-        "predictor_name": "textual-entailment",
-        "max_request_length": 13129
     }
 }

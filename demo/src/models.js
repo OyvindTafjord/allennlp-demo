@@ -15,7 +15,7 @@ const modelGroups = [
         iconSrc: questionIcon,
         defaultOpen: true,
         models: [
-            {model: "roberta-rule-reasoning", name: "Reason with rules", component: RuleReasoning}
+            {model: "rule-reasoning", name: "Reason with rules", component: RuleReasoning}
         ]
     },
     {
